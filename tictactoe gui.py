@@ -321,7 +321,7 @@ def play_again():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
 
-                if position[0] >= 200 and position[0] <= 390 and position[1] >= 260 and position[1] <= 295:
+                if play_game.collidepoint(position):
                     valid = True
                     board = [[" ", " ", " "],
                              [" ", " ", " "],
@@ -330,7 +330,7 @@ def play_again():
                     game_start()
                     play_again()
 
-                elif position[0] >= 235 and position[0] <= 355 and position[1] >= 320 and position[1] <= 355:
+                elif quit_game.collidepoint(position):
                     valid = True
                     pygame.quit()
                     sys.exit()
@@ -342,6 +342,8 @@ def print_board():
         pygame.draw.line(screen, seagreen, (line, 0), (line, width), 10)
         pygame.draw.line(screen, seagreen, (0, line), (width, line), 10)
         pygame.display.update()
+    
+
 
 def game_start():
     screen.fill(gray)
@@ -366,11 +368,11 @@ def game_start():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
 
-                if position[0] >= 120 and position[0] <= 240 and position[1] >= 315 and position[1] <= 365:
+                if with_human.collidepoint(position):
                     valid = True
                     human()
                                         
-                elif position[0] >= 345 and position[0] <= 465 and position[1] >= 315 and position[1] <= 365:
+                elif with_ai.collidepoint(position):
                     valid = True
                     ai()
                     
@@ -460,7 +462,6 @@ def ai():
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     position = pygame.mouse.get_pos()
                     count = 1
-                    
                     insert(position, x_turn, o_turn)
                     count += 1
                     if count == 2:
